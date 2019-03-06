@@ -66,3 +66,24 @@ console.log(convertString("John Snow"));
 // '0000', 123, 'l' -> 0123 
 // '00000000', 123, 'r' -> 12300000
 
+function padFunction() {
+
+
+}
+
+///8///
+// Write a function to capitalize the first letter of a string and returns modified string.
+
+// "js string exercises" -> "Js string exercises"
+
+function capitalizeLetters(word) {
+    var a = word.slice(1);
+
+    var sliceWord = word.slice(0, 1);
+    var result = sliceWord.toUpperCase();
+
+    var final = result.concat(a);
+
+    return final;
+}
+console.log(capitalizeLetters("js string exercises"));
