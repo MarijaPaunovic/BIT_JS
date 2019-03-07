@@ -87,3 +87,38 @@ function capitalizeLetters(word) {
     return final;
 }
 console.log(capitalizeLetters("js string exercises"));
+
+// 9.  Write a function to hide email addresses to protect them from unauthorized users.
+//	"somerandomaddress@example.com" -> "somerand...@example.com"
+
+function hideEmail (email){
+    
+    var b = email.split('');
+    b.splice(8, 9, '...');
+    return b.join('');
+}
+console.log(hideEmail("somerandomaddress@example.com"))
+
+// 10.Write a program that accepts a string as input and swaps the case of each character. For example, if you input 'The Quick Brown Fox', the output should be 'tHE qUICK bROWN fOX'.
+// var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+// var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+
+// "The Quick Brown Fox" -> "tHE qUICK bROWN fOX"
+
+function swapsCharacter (input) {
+    var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+    var result = [];
+    
+    for (var i = 0; i < input.length; i++){
+
+        if (UPPER.indexOf(input[i]) !== -1){
+            result += input[i].toLowerCase();
+         } else {
+           result += input[i].toUpperCase();
+         }
+    }
+    return result;
+}
+console.log(swapsCharacter("The Quick Brown Fox"));
+
