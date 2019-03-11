@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     function Person(name, surname) {
         this.name = name;
@@ -9,7 +11,7 @@
     }
 
     function Seat(number, category) {
-        this.number = number || parseInt(10 * Math.random() * 100);
+        this.number = number || Math.floor((Math.random() * 100) + 10);
         this.category = category || "e";
         this.getSeating = function(){
             return this.number + this.category.toUpperCase();
@@ -17,7 +19,7 @@
     };
 
     function Passenger(person, seat) {
-        this.person;
+        this.person;              
         this.seat;
 
         this.getPassenger = function () {
