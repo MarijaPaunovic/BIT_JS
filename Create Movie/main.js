@@ -1,22 +1,28 @@
-var $movieForm = document.querySelector('.movie-form');
+"use strict";
 
-var $createMovie = document.querySelector('.movie-form button');
 var $movieTitle = document.querySelector('.movie-form .title');
 var $movieLength = document.querySelector('.movie-form .length');
 var $movieGenre = document.querySelector('.movie-form .genre');
 
-$createMovie.addEventListener('click', onCreateMovie);
+var $movieForm = document.querySelector('.movie-form');
+var $createMovie = document.querySelector('.movie-form button');
 
 var movies = [];
+$movieTitle.value = "";
+$movieLength.value = "";
+
+$createMovie.addEventListener('click', onCreateMovie);
 
 function onCreateMovie(event) {
     event.preventDefault();
 
-    var newMovie = createMovie(
+     var newMovie = createMovie(
         $movieTitle.value,
         $movieLength.value,
         $movieGenre.value,
     );
+    
+    
     movies.push(newMovie);
 
     renderMovies(movies);
@@ -32,7 +38,7 @@ function Genre(genre) {
     this.name = genre;
 
     this.getData = function () {
-        return this.name[0].toUpperCase() + this.name[name.length - 1].toUpperCase();
+        return this.name[0].toUpperCase() + this.name[this.name.length - 1].toUpperCase();
     }
 };
 
@@ -42,7 +48,7 @@ function Movie(title, length, genre) {
     this.genre = genre;
 
     this.getData = function () {
-        return this.title + ', ' + this.length + ', ' + this.genre.getData();
+        return this.title + ', ' + this.length + 'min, ' + this.genre.getData();
     }
 };
 
@@ -52,6 +58,7 @@ function renderMovies(movies) {
         p.textContent = movies[i].getData();
 
         $movieForm.appendChild(p);
+    
     }
 };
 

@@ -1,90 +1,105 @@
-"use strict";
-
 (function () {
+    "use strict";
+
+    console.log('Hi')
+
     function Person(name, surname) {
         this.name = name;
         this.surname = surname;
 
-        this.getData = function() {
+        this.getPersonData = function () {
             return this.name + " " + this.surname;
         }
+
     }
 
     function Seat(number, category) {
-        this.number = number || Math.floor((Math.random() * 100) + 10);
-        this.category = category || "e";
-        this.getSeating = function(){
-            return this.number + this.category.toUpperCase();
+        this.number = (number == undefined) ? Math.round((90 * Math.random() + 10)) : number;
+        this.category = (category == undefined) ? 'e' : category;
+
+        this.getSeatData = function () {
+            return this.number + ", " + this.category;
         }
-    };
+    }
 
     function Passenger(person, seat) {
-        this.person;              
-        this.seat;
+        this.person = person;
+        this.seat = seat;
 
-        this.getPassenger = function () {
-            return '' + this.seat.getSeating() + this.person.getData();
+        this.getPassengerData = function () {
+            return this.seat.getSeatData().toUpperCase() + " " + this.person.getPersonData();
         }
-    };
-    
-    function Flight (relation, date, listOfPassengers) {
-        this.flightRelation = relation;
-        this.flightDate = new Date(date);
-        this.listOfPassengers = function(list){
-            var list = [];
-            for( var i =0 ; i < this.passenger.getPassenger().length; i++) {
-                list.push(this.passenger.getPassenger()[i])
-            }
-            return list;
-        }   
-        
-        this.addPassenger = function () {
-            return this.person.getData() + this.listOfPassengers;
-        }
-        this.getData = function(){
-            return this.flightDate + ", "+ this.flightRelation+ "\n"+ this.listOfPassengers;
-        }
-    };
-
-    function Airport (name, listOfFlights) {
-        this.airportName = 'Nikola Tesla';
-        this.listOfFlights = listOfFlights;
-
-        this.addFlight = function () {
-           var flights= [];
-           for( var i = 0; i< this.flightRelation.length; i++){
-               flights.push(this.flightRelation[i])
-           } return flights;
-        }   
-        
     }
-    (function creatFlight(flightRelation, flightDate){
-        this.flightRelation = this.flight.flightRelation;
-        this.flightDate = this.flight.flightDate;
-        var flight = this.flight.flightRelation + this.flight.flightDate;
-        return flight;
-    })();
 
-    (function createPassanger(name,lastName, seatNum, category){
-        var passenger;
-        this.name = this.person.name;
-        this.lastName = this.person.surname;
-        this.seatNum = this.seat.number;
-        this.category = this.seat.category;
-        return this.person.name + this.person.surname + this.seat.number + this.seat.category;
-    })
+    function Flight(date, relation) {
+        this.relation = relation;
+        this.date = date;
+        this.listOfPassengers = [];
 
-    // var firstSeat = new Seat(25, "b");
-    // var firstPassenger = new Passenger("firstPerson","25b");
-    // console.log(firstPassenger.getData());
+        this.addPassenger = function (passenger) {
+            this.listOfPassengers.push(passenger);
+        }
 
+        this.getFlightData = function () {
+            var data = this.date.getDate() + ". " + this.date.getMonth() + ". " + this.date.getFullYear() + " " + this.relation + "\n\t";
+            for (var i = 0; i < this.listOfPassengers.length; i++) {
+                data += this.listOfPassengers[i].getPassengerData() + "\n\t";
+            }
 
-    var firstPerson = new Person("Pera", "Peric");
-    console.log(firstPerson.getData());
+            return data;
+        }
+    }
 
-    var firstFlight = new Flight('Belgrade - New York', 'Oct 25 2017');
-    var secondFlight = new Flight('Belgrade - Barcelona', 'Oct 26 2017');
+    function Airport() {
+        this.name = "Nikola Tesla";
+        this.listOfFlights = [];
 
+        this.addFlight = function (flight) {
+            this.listOfFlights.push(flight);
+        }
 
+        this.getData = function () {
+            var data = ''
+            var totalPassengers = 0;
+            for (var i = 0; i < this.listOfFlights.length; i++) {
+                totalPassengers += this.listOfFlights[i].listOfPassengers.length;
+                data += this.listOfFlights[i].getFlightData() + "\n"
+            }
+            return "Airport: " + this.name + ", total passengers: " + totalPassengers + "\n" + data;
+        }
+    }
 
+    function createFlight(date, relation) {
+        return new Flight(date, relation);
+    }
+
+    function createPassenger(name, surname, seatNumber, category) {
+        var person = new Person(name, surname);
+        var seat = new Seat(seatNumber, category)
+
+        return new Passenger(person, seat);
+    }
+
+    var pass1 = createPassenger("John", "Snow", 1, "b");
+    var pass2 = createPassenger("Cercei", "Lannister", 2, "b");
+    var pass3 = createPassenger("Daenerys", "Targaryen", 14);
+    var pass4 = createPassenger("Tyrion", "Lannister");
+
+    var date1 = new Date("Oct 25 2017");
+    var date2 = new Date("Nov 11 2017");
+    var flightOne = createFlight(date1, "Belgrade - New York");
+    var flightTwo = createFlight(date2, "Barcelona - Belgrade");
+
+    flightOne.addPassenger(pass1);
+    flightOne.addPassenger(pass2);
+    flightTwo.addPassenger(pass3);
+    flightTwo.addPassenger(pass4);
+
+    var airport = new Airport();
+    airport.addFlight(flightOne);
+    airport.addFlight(flightTwo);
+
+    console.log(airport.getData());
 })();
+
+
