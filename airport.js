@@ -7,28 +7,42 @@
         this.name = name;
         this.surname = surname;
 
-        this.getPersonData = function () {
+        // this.getPersonData = function () {
+        //     return this.name + " " + this.surname;
+        // }
+
+    }
+    Person.prototype.getPersonData = function () {
             return this.name + " " + this.surname;
         }
 
-    }
 
     function Seat(number, category) {
         this.number = (number == undefined) ? Math.round((90 * Math.random() + 10)) : number;
         this.category = (category == undefined) ? 'e' : category;
 
-        this.getSeatData = function () {
+        // this.getSeatData = function () {
+        //     return this.number + ", " + this.category;
+        // }
+    }
+    Seat.prototype.getSeatData = function () {
             return this.number + ", " + this.category;
         }
-    }
 
     function Passenger(person, seat) {
         this.person = person;
         this.seat = seat;
 
-        this.getPassengerData = function () {
-            return this.seat.getSeatData().toUpperCase() + " " + this.person.getPersonData();
-        }
+        // this.getPassengerData = function () {
+        //     return this.seat.getSeatData().toUpperCase() + " " + this.person.getPersonData();
+        // }
+    }
+    Passenger.prototype = Object.create(Person.prototype);
+    Passenger.prototype = Object.create(Seat.prototype);
+    Passenger.prototype.constructor = Passenger;
+    Passenger.getPassengerData = function(){
+
+        return Passenger.prototype.getSeatData().toUpperCase() + " " + Passenger.prototype.getPersonData();
     }
 
     function Flight(date, relation) {
