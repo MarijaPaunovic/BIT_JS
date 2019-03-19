@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Create Movie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+</head>
+
+<body>
+    <form class="movie-form">
+        <label>Title
+            <input id="title" type="text" name="title" placeholder="Superman">
+        </label>
+        <label>Length (min)
+            <input id="length" type="number" name="length" placeholder="123">
+        </label>
+        <select class="genre">
+            <option value="-">-</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Horror">Horror</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Family">Family</option>
+        </select>
+        <input id="button" type="button" value="Create Movie">
+
+        <div class="movies-list"></div>
+    </form>
+
+ 
+
+    
+    <script src="js/forms.js"></script>
+    <script src="js/entities.js"></script>
+</body>
+
+</html>
