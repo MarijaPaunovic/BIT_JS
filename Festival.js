@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-        //console.log('Hi');
+        console.log('Hi');
 
     function Genre(name) {
         this.name = name;
